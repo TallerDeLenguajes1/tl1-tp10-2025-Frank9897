@@ -21,9 +21,11 @@ class Program
                 Console.WriteLine($"Nombre: {usuario.name}\nCorreo: {usuario.email}\nDomicilio: {usuario.address}");
             }
         }
-                string guardarJson = JsonSerializer.Serialize(usuarios);
-                string json = Path.Combine(Directory.GetCurrentDirectory(),"usuarios.json");
-                await File.WriteAllTextAsync(json,guardarJson);
+    
+        string guardarJson = JsonSerializer.Serialize(usuarios);
+        string json = Path.Combine(Directory.GetCurrentDirectory(),"usuarios.json");
+        await File.WriteAllTextAsync(json,guardarJson);
+
         
     }
 
