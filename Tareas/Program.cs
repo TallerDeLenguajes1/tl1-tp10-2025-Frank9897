@@ -22,22 +22,25 @@ class Program
             Console.WriteLine("No se pudo obtener informacion del json.");
         }else
         {
-            foreach (var tarea in tareas)
+            Console.WriteLine("\n-----------Tareas Realizadas-----------");
+            foreach (var realizadas in tareas)
             {
-                if (tarea.completed)
+                if (realizadas.completed)
                 {
-                    Console.WriteLine("\n-----------Tareas Realizadas-----------");
-                    Console.WriteLine($"[X] Titulo: {tarea.title}");
-                }else
-                {
-                    Console.WriteLine("\n-----------Tareas Pendientes-----------");
-                    Console.WriteLine($"[ ] Titulo: {tarea.title}");
+                    Console.WriteLine($"[X] Titulo: {realizadas.title}");
                 }
-
-                string guardarJson = JsonSerializer.Serialize(tareas, new JsonSerializerOptions{WriteIndented = true});
-                string json = Path.Combine(Directory.GetCurrentDirectory(),"tareas.json");
-                await File.WriteAllTextAsync(json,guardarJson);
             }
+            Console.WriteLine("\n-----------Tareas Pendientes-----------");
+            foreach (var pendientes in tareas)
+            {
+                if (!pendientes.completed)
+                {
+                    Console.WriteLine($"[ ] Titulo: {pendientes.title}");
+                }
+            }
+            string guardarJson = JsonSerializer.Serialize(tareas, new JsonSerializerOptions{WriteIndented = true});
+            string json = Path.Combine(Directory.GetCurrentDirectory(),"tareas.json");
+            await File.WriteAllTextAsync(json,guardarJson);
         }
 
     }
